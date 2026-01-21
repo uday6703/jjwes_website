@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+          /* Left Sidebar Navigation */
+          body {
+            margin: 0;
+            padding: 0;
+          }
+
+          .sidebar-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+          }
+
+          .sidebar-nav::-webkit-scrollbar {
+            width: 6px;
+          }
+
+          .sidebar-nav::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+          }
+
+          .sidebar-nav::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+          }
+
+          .sidebar-nav::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+          }
+
+          .sidebar-header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.1);
+          }
+
+          .sidebar-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+          }
+
+          .sidebar-logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+          }
+
+          .sidebar-title {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 0.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.4;
+          }
+
+          .sidebar-menu {
+            padding: 1.5rem 0;
+            list-style: none;
+            margin: 0;
+          }
+
+          .sidebar-menu .nav-item {
+            margin: 0.5rem 0;
+            position: relative;
+          }
+
+          .sidebar-menu .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            color: #fff !important;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            border-left: 4px solid transparent;
+          }
+
+          .sidebar-menu .nav-link i {
+            width: 25px;
+            margin-right: 12px;
+            font-size: 1.1rem;
+          }
+
+          .sidebar-menu .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-left-color: #fff;
+            padding-left: 2rem;
+          }
+
+          .sidebar-menu .nav-item.active .nav-link {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left-color: #ffc107;
+            font-weight: 700;
+          }
+
+          .sidebar-menu .nav-link.dropdown-toggle::after {
+            position: absolute;
+            right: 1.5rem;
+          }
+
+          .sidebar-submenu {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+          }
+
+          .sidebar-submenu.show {
+            max-height: 500px;
+          }
+
+          .sidebar-submenu .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem 0.8rem 3.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+          }
+
+          .sidebar-submenu .dropdown-item i {
+            width: 20px;
+            margin-right: 10px;
+            font-size: 0.9rem;
+          }
+
+          .sidebar-submenu .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left-color: rgba(255, 255, 255, 0.5);
+            padding-left: 4rem;
+            color: #fff;
+          }
+
+          .sidebar-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0.5rem 0;
+          }
+
+          .donate-link {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            margin: 1rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+          }
+
+          .donate-link:hover {
+            background: linear-gradient(135deg, #ffca28 0%, #ffa726 100%);
+            transform: scale(1.02);
+            box-shadow: 0 6px 15px rgba(255, 193, 7, 0.4);
+          }
+
+          .main-content {
+            margin-left: 280px;
+            transition: margin-left 0.3s ease;
+          }
+
+          .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border: none;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+          }
+
+          .menu-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+          }
+
+          /* Mobile Responsive */
+          @media (max-width: 991px) {
+            .sidebar-nav {
+              transform: translateX(-100%);
+              width: 280px;
+            }
+
+            .sidebar-nav.active {
+              transform: translateX(0);
+            }
+
+            .main-content {
+              margin-left: 0;
+            }
+
+            .menu-toggle {
+              display: block;
+            }
+
+            .overlay {
+              display: none;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(0, 0, 0, 0.5);
+              z-index: 999;
+            }
+
+            .overlay.active {
+              display: block;
+            }
+          }
+
+          @media (max-width: 576px) {
+            .sidebar-nav {
+              width: 250px;
+            }
+
+            .sidebar-title {
+              font-size: 0.95rem;
+            }
+
+            .sidebar-logo {
+              width: 80px;
+              height: 80px;
+            }
+          }
+
+          .gallery-container {
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+              gap: 15px;
+              padding: 20px;
+            }
+
+            .gallery-image {
+              width: 100%;
+              height: 200px;
+              object-fit: cover;
+              border-radius: 10px;
+              box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+              transition: transform 0.3s ease;
+            }
+
+            .gallery-image:hover {
+              transform: scale(1.03);
+            }
+            
+            .gallery-heading {
+                font-size: 20px;
+                color: #0e5c90;
+                text-align: center;
+            }
+            .gallery-div {
+               box-shadow: 5px 10px #888888;
+                padding: 10px;
+                margin: 10px;
+            }
+            
+            @media (max-width: 768px) {
+              .gallery-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                flex-wrap: wrap;
+              }
+            
+              .gallery-image {
+                width: 80vw;          /* Almost full screen width */
+                height: auto;         /* Maintain aspect ratio */
+                margin-bottom: 15px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+              }
+            }
+
+            /* Footer Styles */
+            .footer-section {
+              background: rgb(131, 166, 221);
+              color: #fff;
+              padding: 3rem 0 0;
+              margin-top: 2rem;
+            }
+            .footer-content {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+              gap: 2rem;
+              padding: 0 2rem 2rem;
+            }
+            .footer-brand { max-width: 350px; }
+            .footer-logo {
+              width: 80px;
+              height: 80px;
+              border-radius: 50%;
+              border: 3px solid rgba(255, 255, 255, 0.3);
+              margin-bottom: 1rem;
+            }
+            .footer-brand-name {
+              font-family: 'Poppins', sans-serif;
+              font-size: 1.1rem;
+              font-weight: 600;
+              margin-bottom: 1rem;
+              display: block;
+            }
+            .footer-contact p {
+              font-size: 0.9rem;
+              margin-bottom: 0.5rem;
+              display: flex;
+              align-items: flex-start;
+              gap: 10px;
+            }
+            .footer-contact i { margin-top: 4px; opacity: 0.9; }
+            .footer-heading {
+              font-family: 'Poppins', sans-serif;
+              font-size: 1rem;
+              font-weight: 600;
+              margin-bottom: 1.25rem;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+            }
+            .footer-links { list-style: none; padding: 0; margin: 0; }
+            .footer-links li { margin-bottom: 0.75rem; }
+            .footer-links a {
+              color: rgba(255, 255, 255, 0.9);
+              text-decoration: none;
+              font-size: 0.9rem;
+              transition: all 0.3s ease;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .footer-links a:hover { color: #fff; padding-left: 8px; }
+            .footer-founder {
+              text-align: center;
+              padding: 1.5rem;
+              background: rgba(30, 60, 114, 0.25);
+              border-radius: 16px;
+              border: 2px solid rgba(255, 255, 255, 0.3);
+            }
+            .founder-img {
+              width: 130px;
+              height: 130px;
+              border-radius: 50%;
+              object-fit: cover;
+              border: 4px solid #fff;
+              margin-bottom: 1rem;
+              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+              transition: all 0.3s ease;
+            }
+            .founder-img:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
+            .founder-info h5 {
+              font-family: 'Poppins', sans-serif;
+              font-size: 1.1rem;
+              font-weight: 600;
+              margin-bottom: 0.25rem;
+              color: #fff;
+            }
+            .founder-info p { font-size: 0.9rem; color: #fff; margin-bottom: 0.5rem; font-style: italic; }
+            .founder-info span { font-size: 0.8rem; opacity: 0.85; display: block; line-height: 1.4; }
+            .social-links { display: flex; gap: 0.75rem; margin-top: 1rem; }
+            .social-link {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #fff;
+              font-size: 1rem;
+              transition: all 0.3s ease;
+            }
+            .social-link:hover { transform: translateY(-3px); color: #fff; }
+            .footer-bottom {
+              background: rgba(30, 60, 114, 0.3);
+              padding: 1.25rem 2rem;
+              text-align: center;
+              font-size: 0.875rem;
+            }
+            @media (max-width: 768px) {
+              .footer-content { grid-template-columns: 1fr; text-align: center; }
+              .footer-contact p { justify-content: center; }
+              .social-links { justify-content: center; }
+            }
+
+
+        </style>
+      
+        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="images/JJWESLogo.jpg" type="image/jpeg" />
+        <title>JJWES</title>
+      </head>
+<body>
+  <!-- Mobile Menu Toggle -->
+  <button class="menu-toggle" id="menuToggle">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Overlay for mobile -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Left Sidebar Navigation -->
+  <nav class="sidebar-nav" id="sidebar">
+    <div class="sidebar-header">
+      <img src="images/JJWESLogo.jpg" alt="JJWES Logo" class="sidebar-logo">
+      <h1 class="sidebar-title">JAL-JEEVAN AND WOMEN EMPOWERMENT SOCIETY</h1>
+    </div>
+
+    <ul class="sidebar-menu">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="aboutus.html">
+          <i class="fas fa-info-circle"></i>
+          <span>About Us</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="certificates.html">
+            <i class="fas fa-certificate"></i>
+          <span>Certificates</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="collapse" data-target="#mediaMenu">
+          <i class="fas fa-photo-video"></i>
+          <span>Media</span>
+        </a>
+        <ul class="sidebar-submenu collapse" id="mediaMenu">
+          <li>
+            <a class="dropdown-item" href="gallerypage.html">
+              <i class="fas fa-images"></i>
+              <span>Photo Gallery</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="videos.html">
+              <i class="fas fa-video"></i>
+              <span>Video Gallery</span>
+            </a>
+          </li>
+          <li><div class="sidebar-divider"></div></li>
+          <li>
+            <a class="dropdown-item" href="news.html">
+              <i class="fas fa-newspaper"></i>
+              <span>News</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="collapse" data-target="#programsMenu">
+          <i class="fas fa-tasks"></i>
+          <span>Programs</span>
+        </a>
+        <ul class="sidebar-submenu collapse" id="programsMenu">
+          <li>
+              <a class="dropdown-item" href="msme.html" style="background-color: rgba(255, 255, 255, 0.1);">
+                <i class="fas fa-shield-alt"></i>
+                <span>Cybersecurity Training</span>
+              </a>
+            </li>
+          <li>
+            <a class="dropdown-item" href="saynotodrugs.html">
+              <i class="fas fa-ban"></i>
+              <span>Say No To Drugs</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="rythurakshana.html">
+              <i class="fas fa-seedling"></i>
+              <span>Rythu Rakshana</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="tailoring.html">
+              <i class="fas fa-cut"></i>
+              <span>Tailoring Training</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="ReportonManeustrualHygiene.html">
+              <i class="fas fa-file-alt"></i>
+              <span>Menstrual Hygiene</span>
+            </a>
+          </li>
+          <li><div class="sidebar-divider"></div></li>
+          
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="aboutfounder.html">
+          <i class="fas fa-info-circle"></i>
+          <span>About Founder</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link donate-link" href="donateuspage.html">
+          <i class="fas fa-hand-holding-heart"></i>
+          <span>Donate Now</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <header data-aos="fade-down" data-aos-duration="600"><h1>Event Gallery</h1></header>
+
+    <section class="gallery">
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class="gallery-heading">Tailoring Program At Pitlam</h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/pitlam_1.jpeg" target="_blank"><img src="images/pitlam_1.jpeg" class="gallery-image" /></a>
+            <a href="images/pitlam_2.jpeg" target="_blank"><img src="images/pitlam_2.jpeg" class="gallery-image" /></a>
+            <a href="images/pitlam_3.jpeg" target="_blank"><img src="images/pitlam_3.jpeg" class="gallery-image" /></a>
+            <a href="images/pitlam_4.jpeg" target="_blank"><img src="images/pitlam_4.jpeg" class="gallery-image" /></a>
+            <a href="images/pitlam_5.jpeg" target="_blank"><img src="images/pitlam_5.jpeg" class="gallery-image" /></a>
+            <a href="images/pitlam_6.jpeg" target="_blank"><img src="images/pitlam_6.jpeg" class="gallery-image" /></a>
+            <a href="images/pitlam_7.jpeg" target="_blank"><img src="images/pitlam_7.jpeg" class="gallery-image" /></a>
+            </div>
+        </div>
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class="gallery-heading">Tailoring Program At Nizam Sagar</h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/nizam_sagar_1.jpeg" target="_blank"><img src="images/nizam_sagar_1.jpeg" class="gallery-image" /></a>
+            <a href="images/nizam_sagar_2.jpeg" target="_blank"><img src="images/nizam_sagar_2.jpeg" class="gallery-image" /></a>
+            <a href="images/nizam_sagar_3.jpeg" target="_blank"><img src="images/nizam_sagar_3.jpeg" class="gallery-image" /></a>
+            <a href="images/nizam_sagar_4.jpeg" target="_blank"><img src="images/nizam_sagar_4.jpeg" class="gallery-image" /></a>
+            <a href="images/nizam_sagar_5.jpeg" target="_blank"><img src="images/nizam_sagar_5.jpeg" class="gallery-image" /></a>
+            </div>
+        </div>
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class="gallery-heading">Mestural Hygenine Day<br/>A CSR initiative by unicharm in collaboration with Jal Jeevan & Womwn Empowerment Society</h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <div>
+                <a href="images/sanitary-event-0.jpg" target="_blank"><img src="images/sanitary-event-0.jpg" class="gallery-image" /></a>
+            </div>
+            <a href="images/sanitary-event-1.jpg" target="_blank"><img src="images/sanitary-event-1.jpg" class="gallery-image" /></a>
+            <a href="images/sanitary-event-2.jpg" target="_blank"><img src="images/sanitary-event-2.jpg" class="gallery-image" /></a>
+            <a href="images/sanitary-event-3.jpg" target="_blank"><img src="images/sanitary-event-3.jpg" class="gallery-image" /></a>
+             <a href="images/sanitary-event-4.jpg" target="_blank"><img src="images/sanitary-event-4.jpg" class="gallery-image" /></a>
+            </div>
+        </div>
+
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class=" gallery-heading">Non Official Members SC /St Having Association with Non Govt ..Organization Jal Jeevan and women empowerment society, Government of Telangana Scheduled Castes Development Department , Implementation of PCR & POA acts - Conduct of district Level Vigilance & Monitoring Committee Non Official Members at Kamareddy District, Telangana .503111</h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/sc-1.jpeg" target="_blank"><img src="images/sc-1.jpeg" class="gallery-image" /></a>
+            <a href="images/sc-2.jpeg" target="_blank"><img src="images/sc-2.jpeg" class="gallery-image" /></a>
+            <a href="images/sc-3.jpeg" target="_blank"><img src="images/sc-3.jpeg" class="gallery-image" /></a>
+             <a href="images/sc-4.jpeg" target="_blank"><img src="images/sc-4.jpeg" class="gallery-image" /></a>
+            </div>
+        </div>
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class=" gallery-heading">Babu jagagivanrao jayanthi at kamareddy district Telangana</h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/babu1.jpg" target="_blank"><img src="images/babu1.jpg" class="gallery-image" /></a>
+            <a href="images/babu2.jpg" target="_blank"><img src="images/babu2.jpg" class="gallery-image" /></a>
+            <a href="images/babu3.jpg" target="_blank"><img src="images/babu3.jpg" class="gallery-image" /></a>
+             <a href="images/babu4.jpg" target="_blank"><img src="images/babu4.jpg" class="gallery-image" /></a>
+             <a href="images/babu5.jpg" target="_blank"><img src="images/babu5.jpg" class="gallery-image" /></a>
+            </div>
+        </div>
+        
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class=" gallery-heading">Rythu Rakshana program agreement</h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/Babujagagivanraojayanthi1.jpg" target="_blank"><img src="images/Babujagagivanraojayanthi1.jpg" class="gallery-image" /></a>
+            <a href="images/Babujagagivanraojayanthi2.jpg" target="_blank"><img src="images/Babujagagivanraojayanthi2.jpg" class="gallery-image" /></a>
+            <a href="images/Babujagagivanraojayanthi3.jpg" target="_blank"><img src="images/Babujagagivanraojayanthi3.jpg" class="gallery-image" /></a>
+             <a href="images/Babujagagivanraojayanthi4.jpg" target="_blank"><img src="images/Babujagagivanraojayanthi4.jpg" class="gallery-image" /></a>
+            </div>
+        </div>
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class="gallery-heading">Date. 30-01-2025
+Today Conducted pledge on 
+Anti - Leprosy Day program Given Awareness and the theme for world Leprosy Day Date. 30/1/2025 at Rajampet PHC Govt Hospital.
+            </h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/leprocy1.jpg" target="_blank"><img src="images/leprocy1.jpg" class="gallery-image" /></a>
+            <a href="images/leprocy2.jpg" target="_blank"><img src="images/leprocy2.jpg" class="gallery-image" /></a>
+            <a href="images/leprocy3.jpg" target="_blank"><img src="images/leprocy3.jpg" class="gallery-image" /></a>
+            </div>
+        </div>
+
+
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class="gallery-heading">meeting at Rajampet gramasangam SHG group meeting 
+Gender equality and women empowerment awareness program
+            </h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/rajampet1.jpg" target="_blank"><img src="images/rajampet1.jpg" class="gallery-image" /></a>
+            <a href="images/rajampet2.jpg" target="_blank"><img src="images/rajampet2.jpg" class="gallery-image" /></a>
+            </div>
+        </div>
+
+  
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class="gallery-heading">SHG-based Collaboration in Eco-friendly Product Manufacturing
+            </h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/shg1.jpg" target="_blank"><img src="images/shg1.jpg" class="gallery-image" /></a>
+            <a href="images/shg2.jpg" target="_blank"><img src="images/shg2.jpg" class="gallery-image" /></a>
+            </div>
+        </div>
+        
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class="gallery-heading">Food Awarness program in KGBV machareddy school
+            </h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/school-food1.jpg" target="_blank"><img src="images/school-food1.jpg" class="gallery-image" /></a>
+            <a href="images/school-food2.jpg" target="_blank"><img src="images/school-food2.jpg" class="gallery-image" /></a>
+            <a href="images/school-food3.jpg.jpg" target="_blank"><img src="images/school-food3.jpg" class="gallery-image" /></a>
+            <a href="images/school-food4.jpg.jpg" target="_blank"><img src="images/school-food4.jpg" class="gallery-image" /></a>
+            <a href="images/school-food5.jpg.jpg" target="_blank"><img src="images/school-food5.jpg" class="gallery-image" /></a>
+
+            </div>
+        </div>
+
+        
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class="gallery-heading">Food Awarness program in KGBV machareddy school
+            </h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/school-food1.jpg" target="_blank"><img src="images/school-food1.jpg" class="gallery-image" /></a>
+            <a href="images/school-food2.jpg" target="_blank"><img src="images/school-food2.jpg" class="gallery-image" /></a>
+            <a href="images/school-food3.jpg.jpg" target="_blank"><img src="images/school-food3.jpg" class="gallery-image" /></a>
+            <a href="images/school-food4.jpg.jpg" target="_blank"><img src="images/school-food4.jpg" class="gallery-image" /></a>
+            <a href="images/school-food5.jpg.jpg" target="_blank"><img src="images/school-food5.jpg" class="gallery-image" /></a>
+
+            </div>
+        </div>
+
+        
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class="gallery-heading">World aids day program at kamareddy district<br>Telangana
+            </h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/world-aids-day-1.jpg" target="_blank"><img src="images/world-aids-day-1.jpg" class="gallery-image" /></a>
+            <a href="images/world-aids-day-2.jpg" target="_blank"><img src="images/world-aids-day-2.jpg" class="gallery-image" /></a>
+            <a href="images/world-aids-day-3.jpg" target="_blank"><img src="images/world-aids-day-3.jpg" class="gallery-image" /></a>
+            <a href="images/world-aids-day-4.jpg" target="_blank"><img src="images/world-aids-day-4.jpg" class="gallery-image" /></a>
+            <a href="images/world-aids-day-5.jpg" target="_blank"><img src="images/world-aids-day-5.jpg" class="gallery-image" /></a>
+
+            </div>
+        </div>
+        
+        <div class="gallery-div" data-aos="fade-up" data-aos-duration="600">
+            <h2 class=" gallery-heading">MDM district level food competition program at ZPHS high school devanpalli. Kamareddy <br>
+                        Telangana Participate in DEO kamareddy <br>
+                        HM ZPHS boys school devanpalli 
+            </h2>
+            <div class="gallery-container d-flex flex-row justifycontent-center">
+            <a href="images/29.jpeg" target="_blank"><img src="images/29.jpeg" class="gallery-image" /></a>
+            <a href="images/30.jpeg" target="_blank"><img src="images/30.jpeg" class="gallery-image" /></a>
+            <a href="images/31.jpeg" target="_blank"><img src="images/31.jpeg" class="gallery-image" /></a>
+            </div>
+        </div>
+
+        <div class="event">
+            <h2>Event 2: Tech Conference</h2>
+            <div class="photos">
+                <img src="image4.jpg" alt="Tech Conference 1">
+                <img src="image5.jpg" alt="Tech Conference 2">
+                <img src="image6.jpg" alt="Tech Conference 3">
+            </div>
+        </div>
+        <div>
+          <div class="gallery-container">
+            <!-- Repeat this block for 1 to 36 -->
+            <a href="images/gallery-img25.jpeg" target="_blank"><img src="images/gallery-img25.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img1.jpeg" target="_blank"><img src="images/gallery-img1.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img26.jpeg" target="_blank"><img src="images/gallery-img26.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img7.jpeg" target="_blank"><img src="images/gallery-img7.jpeg" class="gallery-image" /></a>
+
+            <a href="images/1.jpeg" target="_blank"><img src="images/1.jpeg" class="gallery-image" /></a>
+            <a href="images/2.jpeg" target="_blank"><img src="images/2.jpeg" class="gallery-image" /></a>
+            <a href="images/3.jpeg" target="_blank"><img src="images/3.jpeg" class="gallery-image" /></a>
+            <a href="images/4.jpeg" target="_blank"><img src="images/4.jpeg" class="gallery-image" /></a>
+            <a href="images/5.jpeg" target="_blank"><img src="images/5.jpeg" class="gallery-image" /></a>
+            <a href="images/6.jpeg" target="_blank"><img src="images/6.jpeg" class="gallery-image" /></a>
+            <a href="images/7.jpeg" target="_blank"><img src="images/7.jpeg" class="gallery-image" /></a>
+            <a href="images/8.jpeg" target="_blank"><img src="images/8.jpeg" class="gallery-image" /></a>
+            <a href="images/9.jpeg" target="_blank"><img src="images/9.jpeg" class="gallery-image" /></a>
+            <a href="images/10.jpeg" target="_blank"><img src="images/10.jpeg" class="gallery-image" /></a>
+            <a href="images/11.jpeg" target="_blank"><img src="images/11.jpeg" class="gallery-image" /></a>
+            <a href="images/12.jpeg" target="_blank"><img src="images/12.jpeg" class="gallery-image" /></a>
+            <a href="images/13.jpeg" target="_blank"><img src="images/13.jpeg" class="gallery-image" /></a>
+            <a href="images/14.jpeg" target="_blank"><img src="images/14.jpeg" class="gallery-image" /></a>
+            <a href="images/15.jpeg" target="_blank"><img src="images/15.jpeg" class="gallery-image" /></a>
+            <a href="images/16.jpeg" target="_blank"><img src="images/16.jpeg" class="gallery-image" /></a>
+            <a href="images/17.jpeg" target="_blank"><img src="images/17.jpeg" class="gallery-image" /></a>
+            <a href="images/19.jpeg" target="_blank"><img src="images/19.jpeg" class="gallery-image" /></a>
+            <a href="images/20.jpeg" target="_blank"><img src="images/20.jpeg" class="gallery-image" /></a>
+            <a href="images/21.jpeg" target="_blank"><img src="images/21.jpeg" class="gallery-image" /></a>
+            <a href="images/23.jpeg" target="_blank"><img src="images/23.jpeg" class="gallery-image" /></a>
+            <a href="images/24.jpeg" target="_blank"><img src="images/24.jpeg" class="gallery-image" /></a>
+            <a href="images/25.jpeg" target="_blank"><img src="images/25.jpeg" class="gallery-image" /></a>
+            <a href="images/26.jpeg" target="_blank"><img src="images/26.jpeg" class="gallery-image" /></a>
+            <a href="images/27.jpeg" target="_blank"><img src="images/27.jpeg" class="gallery-image" /></a>
+            <a href="images/28.jpeg" target="_blank"><img src="images/28.jpeg" class="gallery-image" /></a>
+            <a href="images/29.jpeg" target="_blank"><img src="images/29.jpeg" class="gallery-image" /></a>
+            <a href="images/30.jpeg" target="_blank"><img src="images/30.jpeg" class="gallery-image" /></a>
+            <a href="images/31.jpeg" target="_blank"><img src="images/31.jpeg" class="gallery-image" /></a>
+            <a href="images/32.jpeg" target="_blank"><img src="images/32.jpeg" class="gallery-image" /></a>
+            <a href="images/33.jpeg" target="_blank"><img src="images/33.jpeg" class="gallery-image" /></a>
+            <a href="images/34.jpeg" target="_blank"><img src="images/34.jpeg" class="gallery-image" /></a>
+            <a href="images/35.jpeg" target="_blank"><img src="images/35.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img2.jpeg" target="_blank"><img src="images/gallery-img2.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img3.jpeg" target="_blank"><img src="images/gallery-img3.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img4.jpeg" target="_blank"><img src="images/gallery-img4.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img5.jpeg" target="_blank"><img src="images/gallery-img5.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img6.jpeg" target="_blank"><img src="images/gallery-img6.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img8.jpeg" target="_blank"><img src="images/gallery-img8.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img9.jpeg" target="_blank"><img src="images/gallery-img9.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img10.jpeg" target="_blank"><img src="images/gallery-img10.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img11.jpeg" target="_blank"><img src="images/gallery-img11.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img12.jpeg" target="_blank"><img src="images/gallery-img12.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img13.jpeg" target="_blank"><img src="images/gallery-img13.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img14.jpeg" target="_blank"><img src="images/gallery-img14.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img15.jpeg" target="_blank"><img src="images/gallery-img15.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img16.jpeg" target="_blank"><img src="images/gallery-img16.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img17.jpeg" target="_blank"><img src="images/gallery-img17.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img18.jpeg" target="_blank"><img src="images/gallery-img18.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img19.jpeg" target="_blank"><img src="images/gallery-img19.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img20.jpeg" target="_blank"><img src="images/gallery-img20.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img21.jpeg" target="_blank"><img src="images/gallery-img21.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img22.jpeg" target="_blank"><img src="images/gallery-img22.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img23.jpeg" target="_blank"><img src="images/gallery-img23.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img24.jpeg" target="_blank"><img src="images/gallery-img24.jpeg" class="gallery-image" /></a>
+            <a href="images/gallery-img27.jpeg" target="_blank"><img src="images/gallery-img27.jpeg" class="gallery-image" /></a>
+          </div>
+          
+    </section>
+
+   
+<!-- Footer Section -->
+<footer class="footer-section" id="ContactUsSection">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="./images/JJWESLogo.jpg" alt="JJWES Logo" class="footer-logo">
+          <span class="footer-brand-name">JJWES</span>
+        </div>
+        <div class="footer-contact">
+          <p><i class="fas fa-map-marker-alt"></i> 5-14/9 BC Colony Tekriyal, Kamareddy, Telangana, 503111</p>
+          <p><i class="fas fa-phone"></i> +91 8500797860, 9502718116</p>
+          <p><i class="fas fa-envelope"></i> jjwes2021@gmail.com</p>
+        </div>
+        <div class="social-links">
+          <a href="https://www.facebook.com/profile.php?id=61561466963145" target="_blank" class="social-link" style="background: #316FF6;"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/jjwes_ngo" target="_blank" class="social-link" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/jal-jeewan-and-women-empowerment-society/" target="_blank" class="social-link" style="background: #0077B5;"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://x.com/jjwes2021" target="_blank" class="social-link" style="background: #000;"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="aboutus.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="gallerypage.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+          <li><a href="certificates.html"><i class="fas fa-chevron-right"></i> Certifications</a></li>
+          <li><a href="donateuspage.html"><i class="fas fa-chevron-right"></i> Donate Us</a></li>
+          <li><a href="aboutfounder.html"><i class="fas fa-chevron-right"></i> About Founder</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Our Programs</h4>
+        <ul class="footer-links">
+          <li><a href="rythurakshana.html"><i class="fas fa-chevron-right"></i> Rythu Rakshana</a></li>
+          <li><a href="tailoring.html"><i class="fas fa-chevron-right"></i> Tailoring Training</a></li>
+          <li><a href="cybersecurity.html"><i class="fas fa-chevron-right"></i> Cybersecurity Awareness</a></li>
+          <li><a href="ReportonManeustrualHygiene.html"><i class="fas fa-chevron-right"></i> Menstrual Hygiene</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-founder">
+          <img src="images/founder2.jpeg" alt="Founder" class="founder-img">
+          <div class="founder-info">
+            <h5>Ravi Kumar Myadari</h5>
+            <p>(Mahendra)</p>
+            <span>Founder, Chief Functionary & President</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 JAL-JEEVAN AND WOMEN EMPOWERMENT SOCIETY (JJWES). All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+  </div>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+
+  menuToggle.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  });
+
+  overlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  // Close sidebar when clicking on a link (mobile)
+  const sidebarLinks = document.querySelectorAll('.sidebar-nav a:not(.dropdown-toggle)');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.innerWidth <= 991) {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+      }
+    });
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>AOS.init({ duration: 800, once: true, offset: 100 });</script>
+</body>
+</html>

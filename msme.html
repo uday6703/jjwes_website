@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/JJWESLogo.jpg" type="image/jpeg" />
+    <title>JJWES | Cybersecurity Training for MSMEs</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6fb;
+        color: #1e2a4a;
+      }
+      
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .sidebar-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 280px;
+        background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+        box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        overflow-y: auto;
+        overflow-x: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar-nav::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .sidebar-nav::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .sidebar-nav::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+      }
+
+      .sidebar-nav::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .sidebar-header {
+        padding: 2rem 1.5rem;
+        text-align: center;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .sidebar-logo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar-logo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+      }
+
+      .sidebar-title {
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 0;
+        letter-spacing: 0.5px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        line-height: 1.4;
+      }
+
+      .sidebar-menu {
+        padding: 1.5rem 0;
+        list-style: none;
+        margin: 0;
+      }
+
+      .sidebar-menu .nav-item {
+        margin: 0.5rem 0;
+        position: relative;
+      }
+
+      .sidebar-menu .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        color: #fff !important;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        position: relative;
+        border-left: 4px solid transparent;
+      }
+
+      .sidebar-menu .nav-link i {
+        width: 25px;
+        margin-right: 12px;
+        font-size: 1.1rem;
+      }
+
+      .sidebar-menu .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-left-color: #fff;
+        padding-left: 2rem;
+      }
+
+      .sidebar-menu .nav-item.active > .nav-link {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-left-color: #ffc107;
+        font-weight: 700;
+      }
+
+      .sidebar-menu .nav-link.dropdown-toggle::after {
+        position: absolute;
+        right: 1.5rem;
+      }
+
+      .sidebar-submenu {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .sidebar-submenu.show {
+        max-height: 500px;
+      }
+
+      .sidebar-submenu .dropdown-item {
+        display: flex;
+        align-items: center;
+        padding: 0.8rem 1.5rem 0.8rem 3.5rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent;
+      }
+
+      .sidebar-submenu .dropdown-item i {
+        width: 20px;
+        margin-right: 10px;
+        font-size: 0.9rem;
+      }
+
+      .sidebar-submenu .dropdown-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-left-color: rgba(255, 255, 255, 0.5);
+        padding-left: 4rem;
+        color: #fff;
+      }
+
+      .sidebar-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 0.5rem 0;
+      }
+
+      .donate-link {
+        background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+        margin: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+      }
+
+      .donate-link .nav-link {
+        border-left-color: transparent;
+        justify-content: center;
+      }
+
+      .donate-link .nav-link:hover {
+        padding-left: 1.5rem;
+      }
+
+      .main-content {
+        margin-left: 280px;
+        background-color: #f4f6fb;
+        min-height: 100vh;
+        transition: margin-left 0.3s ease;
+      }
+
+      .menu-toggle {
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1001;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        border: none;
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .menu-toggle:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      .overlay {
+        display: none;
+      }
+
+      .hero-banner {
+        background: linear-gradient(135deg, rgba(30, 60, 114, 0.95), rgba(42, 82, 152, 0.85)), url('images/green-park-view.jpg') center/cover;
+        color: #fff;
+        padding: 3rem 2rem;
+      }
+
+      .hero-bilingual {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        align-items: start;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .hero-bilingual h1 {
+        font-size: 2.4rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.35);
+      }
+
+      .hero-bilingual h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.35);
+      }
+
+      .hero-bilingual p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      .telugu-text {
+        font-family: 'Noto Sans Telugu', 'Peddana', 'Segoe UI', sans-serif;
+        display: block;
+        color: #1e3c72;
+      }
+
+      .hero-banner .telugu-text {
+        color: #f4f7ff;
+      }
+
+      .about-us-section-heading {
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: #1e3c72;
+        margin-bottom: 0.75rem;
+      }
+
+      .about-us-section-heading .telugu-text {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      .about-us-section-description {
+        font-size: 1.05rem;
+        color: #4c5470;
+        line-height: 1.7;
+      }
+
+      .bilingual-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+        align-items: start;
+      }
+
+      .topics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .info-card {
+        background: #fff;
+        border: 1px solid rgba(30, 60, 114, 0.1);
+        border-radius: 16px;
+        box-shadow: 0 12px 24px rgba(30, 60, 114, 0.08);
+        padding: 24px;
+        height: 100%;
+      }
+
+      .info-card h3 {
+        font-size: 1.15rem;
+        color: #1e3c72;
+        margin-bottom: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .info-card h3 .telugu-text {
+        font-size: 1rem;
+        color: #2d4f9f;
+      }
+
+      .info-card__columns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .info-card__columns ul {
+        flex: 1 1 220px;
+        margin: 0;
+        padding-left: 1.2rem;
+        color: #4c5470;
+        line-height: 1.6;
+      }
+
+      .info-card__columns ul li + li {
+        margin-top: 0.4rem;
+      }
+
+      .benefits-strip {
+        background: linear-gradient(120deg, rgba(30, 60, 114, 0.12), rgba(42, 82, 152, 0.1));
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 18px 35px rgba(30, 60, 114, 0.12);
+      }
+
+      .msme-gallery {
+        margin-top: 2rem;
+      }
+
+      .msme-gallery img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 18px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .msme-gallery .col-md-4 {
+        margin-bottom: 24px;
+      }
+
+      .footer-section-div {
+        background: #1e3c72;
+        color: #fff;
+        margin-top: 3rem;
+      }
+
+      .contact-us-div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        justify-content: space-between;
+      }
+
+      .contact-us-div ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .contact-us-div li {
+        margin-bottom: 0.5rem;
+      }
+
+      .heading {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .pass-image {
+        width: 160px;
+        border-radius: 12px;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .founder-con {
+        text-align: center;
+      }
+
+      @media (max-width: 991px) {
+        .sidebar-nav {
+          transform: translateX(-100%);
+          width: 280px;
+        }
+
+        .sidebar-nav.active {
+          transform: translateX(0);
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+
+        .overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 999;
+        }
+
+        .overlay.active {
+          display: block;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-bilingual h1 {
+          font-size: 2rem;
+        }
+
+        .hero-bilingual h2 {
+          font-size: 1.7rem;
+        }
+
+        .info-card__columns {
+          flex-direction: column;
+        }
+
+        .benefits-strip {
+          padding: 24px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .sidebar-nav {
+          width: 250px;
+        }
+
+        .sidebar-title {
+          font-size: 0.95rem;
+        }
+
+        .sidebar-logo {
+          width: 80px;
+          height: 80px;
+        }
+
+        .hero-banner {
+          padding: 2rem 1rem;
+        }
+      }
+
+      /* Footer Styles */
+      .footer-section {
+        background: rgb(131, 166, 221);
+        color: #fff;
+        padding: 3rem 0 0;
+        margin-top: 2rem;
+      }
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2rem;
+        padding: 0 2rem 2rem;
+      }
+      .footer-brand { max-width: 350px; }
+      .footer-logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        margin-bottom: 1rem;
+      }
+      .footer-brand-name {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: block;
+      }
+      .footer-contact p {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .footer-contact i { margin-top: 4px; opacity: 0.9; }
+      .footer-heading {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .footer-links { list-style: none; padding: 0; margin: 0; }
+      .footer-links li { margin-bottom: 0.75rem; }
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .footer-links a:hover { color: #fff; padding-left: 8px; }
+      .footer-founder {
+        text-align: center;
+        padding: 1.5rem;
+        background: rgba(30, 60, 114, 0.25);
+        border-radius: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+      .founder-img {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #fff;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+      .founder-img:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
+      .founder-info h5 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #fff;
+      }
+      .founder-info p { font-size: 0.9rem; color: #fff; margin-bottom: 0.5rem; font-style: italic; }
+      .founder-info span { font-size: 0.8rem; opacity: 0.85; display: block; line-height: 1.4; }
+      .social-links { display: flex; gap: 0.75rem; margin-top: 1rem; }
+      .social-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+      .social-link:hover { transform: translateY(-3px); color: #fff; }
+      .footer-bottom {
+        background: rgba(30, 60, 114, 0.3);
+        padding: 1.25rem 2rem;
+        text-align: center;
+        font-size: 0.875rem;
+      }
+      @media (max-width: 768px) {
+        .footer-content { grid-template-columns: 1fr; text-align: center; }
+        .footer-contact p { justify-content: center; }
+        .social-links { justify-content: center; }
+      }
+      /* ---------------------------- */
+        /*     GALLERY SECTION STYLE    */
+        /* ---------------------------- */
+        
+        .gallery-div {
+          margin-top: 3rem;
+          padding: 2rem;
+          background: #ffffff;
+          border-radius: 16px;
+          box-shadow: 0 10px 30px rgba(30, 60, 114, 0.08);
+          transition: all 0.3s ease-in-out;
+        }
+        
+        .gallery-div:hover {
+          box-shadow: 0 16px 40px rgba(30, 60, 114, 0.12);
+        }
+        
+        .gallery-heading {
+          font-size: 1.6rem;
+          font-weight: 700;
+          text-align: center;
+          color: #1e3c72;
+          margin-bottom: 2rem;
+          line-height: 1.4;
+          text-transform: uppercase;
+        }
+        
+        .gallery-div p {
+          text-align: center;
+          color: #4c5470;
+        }
+        
+        /* Gallery Images */
+        .gallery-image {
+          width: 100%;
+          height: 260px;
+          object-fit: cover;
+          border-radius: 14px;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+          transition: all 0.35s ease;
+          border: 3px solid transparent;
+        }
+        
+        /* Hover effect */
+        .gallery-image:hover {
+          transform: translateY(-6px) scale(1.03);
+          box-shadow: 0 12px 26px rgba(0,0,0,0.20);
+          border-color: #1e3c72;
+        }
+        
+        /* Make rows clean & spaced */
+        .gallery-div .row {
+          margin-top: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+          .gallery-image {
+            height: 220px;
+          }
+        
+          .gallery-heading {
+            font-size: 1.3rem;
+          }
+        
+          .gallery-div {
+            padding: 1.5rem;
+          }
+        }
+
+    </style>
+  </head>
+  <body>
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="sidebar-nav" id="sidebar">
+    <div class="sidebar-header">
+      <img src="images/JJWESLogo.jpg" alt="JJWES Logo" class="sidebar-logo">
+      <h1 class="sidebar-title">JAL-JEEVAN AND WOMEN EMPOWERMENT SOCIETY</h1>
+    </div>
+
+    <ul class="sidebar-menu">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="aboutus.html">
+          <i class="fas fa-info-circle"></i>
+          <span>About Us</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="certificates.html">
+            <i class="fas fa-certificate"></i>
+          <span>Certificates</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="collapse" data-target="#mediaMenu">
+          <i class="fas fa-photo-video"></i>
+          <span>Media</span>
+        </a>
+        <ul class="sidebar-submenu collapse" id="mediaMenu">
+          <li>
+            <a class="dropdown-item" href="gallerypage.html">
+              <i class="fas fa-images"></i>
+              <span>Photo Gallery</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="videos.html">
+              <i class="fas fa-video"></i>
+              <span>Video Gallery</span>
+            </a>
+          </li>
+          <li><div class="sidebar-divider"></div></li>
+          <li>
+            <a class="dropdown-item" href="news.html">
+              <i class="fas fa-newspaper"></i>
+              <span>News</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="collapse" data-target="#programsMenu">
+          <i class="fas fa-tasks"></i>
+          <span>Programs</span>
+        </a>
+        <ul class="sidebar-submenu collapse" id="programsMenu">
+          <li>
+              <a class="dropdown-item" href="msme.html" style="background-color: rgba(255, 255, 255, 0.1);">
+                <i class="fas fa-shield-alt"></i>
+                <span>Cybersecurity Training</span>
+              </a>
+            </li>
+          <li>
+            <a class="dropdown-item" href="saynotodrugs.html">
+              <i class="fas fa-ban"></i>
+              <span>Say No To Drugs</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="rythurakshana.html">
+              <i class="fas fa-seedling"></i>
+              <span>Rythu Rakshana</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="tailoring.html">
+              <i class="fas fa-cut"></i>
+              <span>Tailoring Training</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="ReportonManeustrualHygiene.html">
+              <i class="fas fa-file-alt"></i>
+              <span>Menstrual Hygiene</span>
+            </a>
+          </li>
+          <li><div class="sidebar-divider"></div></li>
+          
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="aboutfounder.html">
+          <i class="fas fa-info-circle"></i>
+          <span>About Founder</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link donate-link" href="donateuspage.html">
+          <i class="fas fa-hand-holding-heart"></i>
+          <span>Donate Now</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+
+    <div class="main-content">
+      <header class="hero-banner">
+        <div class="hero-bilingual">
+          <div>
+            <h1>Cybersecurity Training for MSMEs</h1>
+            <p>
+              Designed with support from Google.org, this programme equips Micro, Small, and Medium-sized Enterprises
+              with real-world tools to understand cyber risks, protect customer data, and ensure business continuity in
+              the digital-first economy.
+            </p>
+          </div>
+          <div class="telugu-text" lang="te">
+            <h2>ఎంఎస్ఎంఈల కోసం సైబర్ భద్రత శిక్షణ</h2>
+            <p>
+              Google.org మద్దతుతో రూపొందించిన ఈ కార్యక్రమం సూక్ష్మ, చిన్న, మధ్య తరహా సంస్థలకు (MSMEs) సైబర్ ప్రమాదాలను
+              అర్థం చేసుకోవడానికి, వినియోగదారుల డేటాను రక్షించడానికి, డిజిటల్ ఆర్థిక వ్యవస్థలో వ్యాపార నిరంతరతను నిలపడానికి అవసరమైన ప్రాయోగిక సాధనాలను అందిస్తుంది.
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <section class="container py-5">
+        <div class="mb-4">
+          <h2 class="about-us-section-heading text-center">
+            Topics Covered in the Training
+            <span class="telugu-text" lang="te">శిక్షణలో చేర్చిన అంశాలు</span>
+          </h2>
+          <div class="about-us-section-description bilingual-row">
+            <p>
+              Interactive modules mix case studies from Telangana with step-by-step guidance on securing everyday
+              business operations.
+            </p>
+            <p class="telugu-text" lang="te">
+              తెలంగాణకు చెందిన కేస్ స్టడీలను రోజువారీ వ్యాపార కార్యకలాపాలను భద్రపరచే దశలవారీ మార్గదర్శకంతో మిళితం చేసిన
+              పరస్పర మాడ్యూల్‌లు.
+            </p>
+          </div>
+        </div>
+        <div class="topics-grid">
+          <div class="info-card">
+            <h3>
+              1. Introduction to Cyber Risk
+              <span class="telugu-text" lang="te">సైబర్ ప్రమాదానికి పరిచయం</span>
+            </h3>
+            <div class="info-card__columns">
+              <ul>
+                <li>Recognise emerging cyber threats and the impact on MSME growth.</li>
+                <li>Differentiate risk categories: financial loss, data breaches, and reputational damage.</li>
+              </ul>
+              <ul class="telugu-text" lang="te">
+                <li>ఎంఎస్ఎంఈల పెరుగుదలపై ప్రభావం చూపే కొత్త సైబర్ బెదిరింపులను గుర్తించండి.</li>
+                <li>ఆర్థిక నష్టం, డేటా లీక్, ప్రతిష్ఠ దెబ్బ వంటి ప్రమాదాలను వేరు చేసుకోండి.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-card">
+            <h3>
+              2. Case Studies of Cyber Incidents
+              <span class="telugu-text" lang="te">సైబర్ సంఘటనల అధ్యయనాలు</span>
+            </h3>
+            <div class="info-card__columns">
+              <ul>
+                <li>Hyderabad Water Board website breach – recovery lessons.</li>
+                <li>Financial fraud and scams in Hyderabad with losses of ₹1,866.9 crore (2024).</li>
+                <li>Action plan following a ransomware attack on MSMEs.</li>
+              </ul>
+              <ul class="telugu-text" lang="te">
+                <li>హైదరాబాద్ వాటర్ బోర్డ్ వెబ్‌సైట్ ఉల్లంఘన ఉదంతం - పునరుద్ధరణకు నేర్చుకున్న పాఠాలు.</li>
+                <li>2024లో ₹1,866.9 కోట్ల నష్టంతో హైదరాబాద్‌లో జరిగిన ఆర్థిక మోసాలు మరియు మాయచర్యాలు.</li>
+                <li>ఎంఎస్ఎంఈలను లక్ష్యంగా చేసుకున్న రాన్సమ్‌వేర్ దాడి తరువాత తీసుకోవాల్సిన చర్యల ప్రణాళిక.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-card">
+            <h3>
+              3. Managing Cyber Risks for MSMEs
+              <span class="telugu-text" lang="te">ఎంఎస్ఎంఈల సైబర్ ప్రమాదాల నిర్వహణ</span>
+            </h3>
+            <div class="info-card__columns">
+              <ul>
+                <li>Locate vulnerabilities across operations and vendor ecosystems.</li>
+                <li>Navigate economic and regulatory challenges affecting cybersecurity.</li>
+              </ul>
+              <ul class="telugu-text" lang="te">
+                <li>ఆపరేషన్లు మరియు సరఫరాదారుల వ్యవస్థల్లో ఉండే బలహీనతలను గుర్తించండి.</li>
+                <li>సైబర్ భద్రతపై ప్రభావం చూపే ఆర్థిక, నియంత్రణ సవాళ్లను సమర్థంగా ఎదుర్కొనండి.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-card">
+            <h3>
+              4. Fundamentals of Cyber Hygiene
+              <span class="telugu-text" lang="te">సైబర్ హైజీన్ మూలాలు</span>
+            </h3>
+            <div class="info-card__columns">
+              <ul>
+                <li>Track digital assets: devices, accounts, and IoT endpoints.</li>
+                <li>Implement access controls and least-privilege policies.</li>
+                <li>Schedule updates and patch management without downtime.</li>
+              </ul>
+              <ul class="telugu-text" lang="te">
+                <li>పరికరాలు, ఖాతాలు, IoT పాయింట్‌ల వంటి డిజిటల్ ఆస్తుల జాబితాను నిర్వహించండి.</li>
+                <li>అభిగమ నియంత్రణలు, కనిష్ట హక్కుల విధానాలను అమలు చేయండి.</li>
+                <li>డౌన్‌టైమ్ లేకుండా అప్డేట్‌లు, ప్యాచ్‌ల నిర్వహణను షెడ్యూల్ చేయండి.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-card">
+            <h3>
+              5. Passwords &amp; Two-Factor Authentication
+              <span class="telugu-text" lang="te">పాస్‌వర్డ్‌లు &amp; రెండు-దశ ధృవీకరణ</span>
+            </h3>
+            <div class="info-card__columns">
+              <ul>
+                <li>Create resilient passwords and passphrases for teams.</li>
+                <li>Adopt password managers to simplify secure credentials.</li>
+                <li>Roll out multi-factor authentication (2FA/MFA) organisation-wide.</li>
+              </ul>
+              <ul class="telugu-text" lang="te">
+                <li>జట్ల కోసం బలమైన పాస్‌వర్డ్‌లు మరియు పాస్‌ఫ్రేజ్‌లను రూపొందించండి.</li>
+                <li>భద్రమైన గుర్తింపులను నిర్వహించేందుకు పాస్‌వర్డ్ మేనేజర్‌లను ఉపయోగించండి.</li>
+                <li>సంస్థ అంతటా బహుళ-దశ ధృవీకరణ (2FA/MFA) అమలు చేయండి.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-card">
+            <h3>
+              6. Defending Against Phishing &amp; Malware
+              <span class="telugu-text" lang="te">ఫిషింగ్ &amp; మాల్వేర్‌నుండి రక్షణ</span>
+            </h3>
+            <div class="info-card__columns">
+              <ul>
+                <li>Identify email, SMS (smishing), call (vishing), and QR (quishing) scams.</li>
+                <li>Respond quickly to suspected phishing attempts.</li>
+                <li>Prevent ransomware with layered security controls.</li>
+              </ul>
+              <ul class="telugu-text" lang="te">
+                <li>ఈమెయిల్, SMS (స్మిషింగ్), కాల్ (విషింగ్), QR (క్విషింగ్) మోసాలను గుర్తించండి.</li>
+                <li>అనుమానాస్పద ఫిషింగ్ ప్రయత్నాలకు వెంటనే ప్రతిస్పందించండి.</li>
+                <li>బహుళ భద్రత నియంత్రణల ద్వారా రాన్సమ్‌వేర్‌ను నిరోధించండి.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-card">
+            <h3>
+              7. Data Protection &amp; Backup Strategies
+              <span class="telugu-text" lang="te">డేటా సంరక్షణ &amp; బ్యాకప్ వ్యూహాలు</span>
+            </h3>
+            <div class="info-card__columns">
+              <ul>
+                <li>Plan offline and cloud-based backup schedules.</li>
+                <li>Build business continuity plans that prioritise mission-critical services.</li>
+                <li>Study an MSME that avoided ransom due to robust backups.</li>
+              </ul>
+              <ul class="telugu-text" lang="te">
+                <li>ఆఫ్‌లైన్, క్లౌడ్ ఆధారిత బ్యాకప్ షెడ్యూల్‌లను ప్రణాళిక చేయండి.</li>
+                <li>ప్రధాన సేవలకు ప్రాధాన్యం ఇస్తూ వ్యాపార నిరంతరత ప్రణాళికలను రూపొందించండి.</li>
+                <li>బలమైన బ్యాకప్‌లతో రాన్సమ్ చెల్లించకుండా తప్పించుకున్న ఎంఎస్ఎంఈ కేస్‌ను తెలుసుకోండి.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-card">
+            <h3>
+              8. Regulatory Compliance &amp; Best Practices
+              <span class="telugu-text" lang="te">నియంత్రణ అనుసరణ &amp; ఉత్తమ పద్ధతులు</span>
+            </h3>
+            <div class="info-card__columns">
+              <ul>
+                <li>Understand cybersecurity laws and sector standards.</li>
+                <li>Adopt checklists to stay compliant with data protection regulations.</li>
+              </ul>
+              <ul class="telugu-text" lang="te">
+                <li>సైబర్ భద్రత చట్టాలు మరియు రంగ ప్రమాణాలను అర్థం చేసుకోండి.</li>
+                <li>డేటా సంరక్షణ నిబంధనలకు అనుగుణంగా ఉండేందుకు చెక్‌లిస్టులను ఉపయోగించండి.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container pb-5">
+        <div class="benefits-strip">
+          <div class="column align-items-center">
+            <div class="">
+              <h2 class="about-us-section-heading">
+                Benefits for Participating MSMEs
+                <span class="telugu-text" lang="te">శిక్షణలో పాల్గొనే ఎంఎస్ఎంఈలకు లాభాలు</span>
+              </h2>
+              <div class="about-us-section-description bilingual-row">
+                <p>
+                  Organisations leave with tailored action plans, documented policies, and trained champions ready to
+                  lead cybersecurity improvements.
+                </p>
+                <p class="telugu-text" lang="te">
+                  సంస్థలు అనుకూల ప్రణాళికలు, పద్ధతి పత్రాలు, సైబర్ మార్పును నడిపే శిక్షణ పొందిన నాయకులతో తిరిగి వెళ్తాయి.
+                </p>
+              </div>
+            </div>
+            <div class="">
+              <div class="topics-grid">
+                <div class="info-card">
+                  <h3>
+                    1. Risk Mitigation &amp; Protection
+                    <span class="telugu-text" lang="te">ప్రమాద నివారణ &amp; రక్షణ</span>
+                  </h3>
+                  <div class="info-card__columns">
+                    <ul>
+                      <li>Reduce the likelihood of costly cyber incidents and downtime.</li>
+                      <li>Protect customer data, brand reputation, and operational continuity.</li>
+                    </ul>
+                    <ul class="telugu-text" lang="te">
+                      <li>మార్గ మధ్యలో చోటుచేసుకునే ఖరీదైన సైబర్ ఘటనలు, నిలుపుదల అవకాశాన్ని తగ్గించండి.</li>
+                      <li>వినియోగదారుల డేటా, బ్రాండ్ ప్రతిష్ఠ, కార్యకలాప నిరంతరతను కాపాడండి.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="info-card">
+                  <h3>
+                    2. Enhanced Awareness &amp; Preparedness
+                    <span class="telugu-text" lang="te">విజ్ఞానం &amp; సిద్ధత పెంపు</span>
+                  </h3>
+                  <div class="info-card__columns">
+                    <ul>
+                      <li>Train teams to recognise threats early and activate preventive measures.</li>
+                      <li>Embed security orientation into onboarding and leadership reviews.</li>
+                    </ul>
+                    <ul class="telugu-text" lang="te">
+                      <li>బెదిరింపులను ముందుగా గుర్తించి నివారించేలా బృందాలను శిక్షణ ఇవ్వండి.</li>
+                      <li>ఆన్‌బోర్డింగ్, నాయకత్వ సమీక్షల్లో భద్రతాభావనను కలపండి.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="info-card">
+                  <h3>
+                    3. Compliance &amp; Regulatory Alignment
+                    <span class="telugu-text" lang="te">అనుసరణ &amp; నియంత్రణ సరళి</span>
+                  </h3>
+                  <div class="info-card__columns">
+                    <ul>
+                      <li>Stay aligned with national cybersecurity advisories and industry mandates.</li>
+                      <li>Minimise penalties while strengthening stakeholder confidence.</li>
+                    </ul>
+                    <ul class="telugu-text" lang="te">
+                      <li>సంస్థను జాతీయ సైబర్ మార్గదర్శకాలు, రంగ ప్రమాణాలకు అనుగుణంగా ఉంచండి.</li>
+                      <li>పెద్ద సంఖ్యలోని జరిమానాలను తగ్గిస్తూ వాటాదారుల విశ్వాసాన్ని బలపరచండి.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="info-card">
+                  <h3>
+                    4. Cost Savings &amp; Business Continuity
+                    <span class="telugu-text" lang="te">ఖర్చు ఆదా &amp; వ్యాపార నిరంతరత</span>
+                  </h3>
+                  <div class="info-card__columns">
+                    <ul>
+                      <li>Avoid emergency spending on ransom, remediation, and data recovery.</li>
+                      <li>Ensure services continue even when cyber incidents occur.</li>
+                    </ul>
+                    <ul class="telugu-text" lang="te">
+                      <li>రాన్సమ్, పునరుద్ధరణ, డేటా రికవరీపై అవాంఛిత ఖర్చును తగ్గించండి.</li>
+                      <li>సైబర్ ఘటనల సమయంలో కూడా సేవలు కొనసాగేలా చూడండి.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="info-card">
+                  <h3>
+                    5. Stronger Customer Trust &amp; Advantage
+                    <span class="telugu-text" lang="te">బలమైన వినియోగదారుల నమ్మకం &amp; పోటీ ప్రయోజనం</span>
+                  </h3>
+                  <div class="info-card__columns">
+                    <ul>
+                      <li>Demonstrate secure practices to win and retain sensitive contracts.</li>
+                      <li>Stand out as a security-conscious enterprise in competitive markets.</li>
+                    </ul>
+                    <ul class="telugu-text" lang="te">
+                      <li>భద్రతా ప్రక్రియలను చూపించి సున్నిత ఒప్పందాలను గెలుచుకోండి.</li>
+                      <li>భద్రతను ప్రాధాన్యం చేసే సంస్థగా పోటీలో ప్రత్యేకతను పొందండి.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container pb-5">
+        <div class="text-center mb-4">
+          <h2 class="about-us-section-heading">
+            Workshop Moments
+            <span class="telugu-text" lang="te">వర్క్‌షాప్ క్షణాలు</span>
+          </h2>
+          <div class="about-us-section-description bilingual-row">
+            <p>
+              Glimpses of the interactive training sessions, peer learning groups, and mentoring clinics.
+            </p>
+            <p class="telugu-text" lang="te">
+              సూక్ష్మ శిక్షణ సెషన్లు, సహకార అధ్యయన సమూహాలు, మెంటర్ క్లినిక్‌ల జ్ఞాపకాలను చూడండి.
+            </p>
+          </div>
+        </div>
+      
+        <div class="gallery-div">
+            <h2 class="gallery-heading">
+                Pitlam mandal Kamareddy district <br>
+                MSMES PROGRAM
+            </h2>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-4 mb-3">
+                        <a href="images/msme/msme9.jpg" target="_blank">
+                            <img src="images/msme/msme9.jpg" class="img-fluid gallery-image" />
+                        </a>
+                    </div>
+                     <div class="col-12 col-md-4 mb-3">
+                        <a href="images/msme/msme10.jpg" target="_blank">
+                            <img src="images/msme/msme10.jpg" class="img-fluid gallery-image" />
+                        </a>
+                    </div>
+                     <div class="col-12 col-md-4 mb-3">
+                        <a href="images/msme/msme11.jpg" target="_blank">
+                            <img src="images/msme/msme11.jpg" class="img-fluid gallery-image" />
+                        </a>
+                    </div>
+                     <div class="col-12 col-md-4 mb-3">
+                        <a href="images/msme/msme12.jpg" target="_blank">
+                            <img src="images/msme/msme12.jpg" class="img-fluid gallery-image" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-div">
+            <h2 class="gallery-heading">
+                Bichkunda mandal kamareddy district Telangana <br>
+                Cyber security training workshop for msmes
+            </h2>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-4 mb-3">
+                        <a href="images/msme/msme3.jpg" target="_blank">
+                            <img src="images/msme/msme3.jpg" class="img-fluid gallery-image" />
+                        </a>
+                    </div>
+                     <div class="col-12 col-md-4 mb-3">
+                        <a href="images/msme/msme4.jpg" target="_blank">
+                            <img src="images/msme/msme4.jpg" class="img-fluid gallery-image" />
+                        </a>
+                    </div>
+                     <div class="col-12 col-md-4 mb-3">
+                        <a href="images/msme/msme5.jpg" target="_blank">
+                            <img src="images/msme/msme5.jpg" class="img-fluid gallery-image" />
+                        </a>
+                    </div>
+                     <div class="col-12 col-md-4 mb-3">
+                        <a href="images/msme/msme6.jpg" target="_blank">
+                            <img src="images/msme/msme6.jpg" class="img-fluid gallery-image" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <!-- Footer Section -->
+      <footer class="footer-section" id="ContactUsSection">
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-col">
+              <div class="footer-brand">
+                <img src="./images/JJWESLogo.jpg" alt="JJWES Logo" class="footer-logo">
+                <span class="footer-brand-name">JJWES</span>
+              </div>
+              <div class="footer-contact">
+                <p><i class="fas fa-map-marker-alt"></i> 5-14/9 BC Colony Tekriyal, Kamareddy, Telangana, 503111</p>
+                <p><i class="fas fa-phone"></i> +91 8500797860, 9502718116</p>
+                <p><i class="fas fa-envelope"></i> jjwes2021@gmail.com</p>
+              </div>
+              <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=61561466963145" target="_blank" class="social-link" style="background: #316FF6;"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/jjwes_ngo" target="_blank" class="social-link" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/jal-jeewan-and-women-empowerment-society/" target="_blank" class="social-link" style="background: #0077B5;"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://x.com/jjwes2021" target="_blank" class="social-link" style="background: #000;"><i class="fab fa-x-twitter"></i></a>
+              </div>
+            </div>
+            <div class="footer-col">
+              <h4 class="footer-heading">Quick Links</h4>
+              <ul class="footer-links">
+                <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                <li><a href="aboutus.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                <li><a href="gallerypage.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                <li><a href="certificates.html"><i class="fas fa-chevron-right"></i> Certifications</a></li>
+                <li><a href="donateuspage.html"><i class="fas fa-chevron-right"></i> Donate Us</a></li>
+                <li><a href="aboutfounder.html"><i class="fas fa-chevron-right"></i> About Founder</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4 class="footer-heading">Our Programs</h4>
+              <ul class="footer-links">
+                <li><a href="rythurakshana.html"><i class="fas fa-chevron-right"></i> Rythu Rakshana</a></li>
+                <li><a href="tailoring.html"><i class="fas fa-chevron-right"></i> Tailoring Training</a></li>
+                <li><a href="cybersecurity.html"><i class="fas fa-chevron-right"></i> Cybersecurity Awareness</a></li>
+                <li><a href="ReportonManeustrualHygiene.html"><i class="fas fa-chevron-right"></i> Menstrual Hygiene</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <div class="footer-founder">
+                <img src="images/founder2.jpeg" alt="Founder" class="founder-img">
+                <div class="founder-info">
+                  <h5>Ravi Kumar Myadari</h5>
+                  <p>(Mahendra)</p>
+                  <span>Founder, Chief Functionary & President</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2025 JAL-JEEVAN AND WOMEN EMPOWERMENT SOCIETY (JJWES). All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+      const menuToggle = document.getElementById('menuToggle');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+
+      menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+      });
+
+      overlay.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+      });
+
+      const sidebarLinks = document.querySelectorAll('.sidebar-nav a:not(.dropdown-toggle)');
+      sidebarLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 991) {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
