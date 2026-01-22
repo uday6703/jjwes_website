@@ -1775,6 +1775,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>AOS.init({ duration: 800, once: true, offset: 100 });</script>
 <script>
+  import { inject } from 'https://cdn.jsdelivr.net/npm/@vercel/analytics@1/dist/index.mjs';
+  inject();
   const menuToggle = document.getElementById('menuToggle');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('overlay');
@@ -1783,6 +1785,8 @@
   document.querySelectorAll('.sidebar-nav a:not(.dropdown-toggle)').forEach(link => {
     link.addEventListener('click', function() { if (window.innerWidth <= 991) { sidebar.classList.remove('active'); overlay.classList.remove('active'); } });
   });
+  
 </script>
+
 </body>
 </html>
