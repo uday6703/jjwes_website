@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Menstrual Hygiene Day | JJWES</title>
+
+  <link rel="icon" href="images/JJWESLogo.jpg" type="image/jpeg" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #fff7fb;
+      color: #1f2937;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Sidebar Navigation - same style and color family as your existing page */
+    .sidebar-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 280px;
+      background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+      box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      overflow-y: auto;
+      overflow-x: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-nav::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar-nav::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar-nav::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+    }
+
+    .sidebar-nav::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .sidebar-header {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+      object-fit: cover;
+    }
+
+    .sidebar-logo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar-title {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 0.5px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      line-height: 1.4;
+    }
+
+    .sidebar-menu {
+      padding: 1.5rem 0;
+      list-style: none;
+      margin: 0;
+    }
+
+    .sidebar-menu .nav-item {
+      margin: 0.5rem 0;
+      position: relative;
+    }
+
+    .sidebar-menu .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      color: #fff !important;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      border-left: 4px solid transparent;
+    }
+
+    .sidebar-menu .nav-link i {
+      width: 25px;
+      margin-right: 12px;
+      font-size: 1.1rem;
+    }
+
+    .sidebar-menu .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-left-color: #fff;
+      padding-left: 2rem;
+    }
+
+    .sidebar-menu .nav-item.active .nav-link {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-left-color: #ffc107;
+      font-weight: 700;
+    }
+
+    .sidebar-menu .nav-link.dropdown-toggle::after {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .sidebar-submenu {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar-submenu.show {
+      max-height: 500px;
+    }
+
+    .sidebar-submenu .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1.5rem 0.8rem 3.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+      white-space: normal;
+    }
+
+    .sidebar-submenu .dropdown-item i {
+      width: 20px;
+      margin-right: 10px;
+      font-size: 0.9rem;
+    }
+
+    .sidebar-submenu .dropdown-item:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-left-color: rgba(255, 255, 255, 0.5);
+      padding-left: 4rem;
+      color: #fff;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 0.5rem 0;
+    }
+
+    .donate-link {
+      background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+      margin: 1rem 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+    }
+
+    .donate-link:hover {
+      background: linear-gradient(135deg, #ffca28 0%, #ffa726 100%);
+      transform: scale(1.02);
+      box-shadow: 0 6px 15px rgba(255, 193, 7, 0.4);
+      border-left-color: transparent !important;
+      padding-left: 1.5rem !important;
+    }
+
+    .main-content {
+      margin-left: 280px;
+      transition: margin-left 0.3s ease;
+    }
+
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      border: none;
+      color: #fff;
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .overlay {
+      display: none;
+    }
+
+    @media (max-width: 991px) {
+      .sidebar-nav {
+        transform: translateX(-100%);
+        width: 280px;
+      }
+
+      .sidebar-nav.active {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      .overlay.active {
+        display: block;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .sidebar-nav {
+        width: 250px;
+      }
+
+      .sidebar-title {
+        font-size: 0.95rem;
+      }
+
+      .sidebar-logo {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    /* Hero */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(rgba(255, 247, 251, 0.55), rgba(255, 247, 251, 0.85)),
+        linear-gradient(135deg, #fff1f7 0%, #ffffff 100%);
+      padding: 80px 0 50px;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, #ffffff 0%, #fff6f9 100%);
+      border: 1px solid rgba(216, 27, 96, 0.12);
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(216, 27, 96, 0.10);
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      padding: 34px;
+    }
+
+    .hero-main-image {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 14px 34px rgba(216, 27, 96, 0.16);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(216, 27, 96, 0.10);
+      color: #d81b60;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      color: #2f1630;
+      margin-bottom: 16px;
+    }
+
+    .hero-text {
+      color: #6b5569;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 24px;
+      max-width: 68ch;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .stat-box {
+      background: #fff;
+      border: 1px solid rgba(216, 27, 96, 0.12);
+      border-radius: 20px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: 1.4rem;
+      color: #d81b60;
+      margin-bottom: 4px;
+    }
+
+    .stat-box span {
+      color: #6b5569;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .hero-side {
+      height: 100%;
+      padding: 34px;
+      background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+      color: #fff;
+    }
+
+    .hero-side h3 {
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+      font-weight: 800;
+    }
+
+    .hero-side p,
+    .hero-side li {
+      color: rgba(255,255,255,0.92);
+      line-height: 1.8;
+    }
+
+    .hero-side ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .section {
+      padding: 68px 0;
+    }
+
+    .section-heading {
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: #2f1630;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      color: #6b5569;
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .info-card {
+      background: #fff;
+      border: 1px solid rgba(216, 27, 96, 0.12);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      height: 100%;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 34px rgba(0,0,0,0.08);
+    }
+
+    .info-card h3 {
+      color: #7b1fa2;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .info-card p {
+      color: #6b5569;
+      line-height: 1.8;
+      margin-bottom: 0;
+    }
+
+    .icon-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(216, 27, 96, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .icon-circle i {
+      color: #d81b60;
+      font-size: 28px;
+    }
+
+    .highlight-box {
+      background: #fff;
+      border: 1px solid rgba(216, 27, 96, 0.12);
+      border-radius: 22px;
+      padding: 26px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      height: 100%;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .highlight-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 34px rgba(0,0,0,0.08);
+    }
+
+    .highlight-box i {
+      font-size: 38px;
+      color: #d81b60;
+      margin-bottom: 16px;
+    }
+
+    .highlight-box h4 {
+      color: #7b1fa2;
+      font-weight: 800;
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+    }
+
+    .highlight-box p {
+      color: #6b5569;
+      margin-bottom: 0;
+      line-height: 1.7;
+    }
+
+    .poster-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid rgba(216, 27, 96, 0.12);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+    }
+
+    .poster-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+    }
+
+    .gallery-box {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+      border: 1px solid rgba(216, 27, 96, 0.10);
+      background: #fff;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.06);
+    }
+
+    .cta-strip {
+      background: linear-gradient(135deg, #d81b60 0%, #7b1fa2 100%);
+      color: #fff;
+      border-radius: 24px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: 0 16px 34px rgba(123, 31, 162, 0.18);
+    }
+
+    .cta-strip h3 {
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .cta-strip p {
+      margin-bottom: 0;
+      color: rgba(255,255,255,0.92);
+    }
+
+    /* Footer same style and links as your existing page */
+    .footer-section {
+      background: rgb(131, 166, 221);
+      color: #fff;
+      padding: 3rem 0 0;
+      margin-top: 2rem;
+    }
+
+    .award-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffd700;
+      margin-bottom: 12px;
+    }
+
+    .award-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .award-list li {
+      background: rgba(255,255,255,0.08);
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      font-size: 16px;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      padding: 0 2rem 2rem;
+    }
+
+    .footer-brand {
+      max-width: 350px;
+    }
+
+    .footer-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand-name {
+      font-family: Arial, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .footer-contact p {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .footer-contact i {
+      margin-top: 4px;
+      opacity: 0.9;
+    }
+
+    .footer-heading {
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+      padding-left: 8px;
+    }
+
+    .footer-founder {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(30, 60, 114, 0.25);
+      border-radius: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .founder-img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .founder-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .founder-info h5 {
+      font-family: Arial, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: #fff;
+    }
+
+    .founder-info p {
+      font-size: 0.9rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    .founder-info span {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      display: block;
+      line-height: 1.4;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-3px);
+      color: #fff;
+    }
+
+    .footer-bottom {
+      background: rgba(30, 60, 114, 0.3);
+      padding: 1.25rem 2rem;
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-contact p {
+        justify-content: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner,
+      .hero-side {
+        padding: 24px;
+      }
+
+      .gallery-img {
+        height: 210px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+  <!-- Same navbar and same links -->
+  <nav class="sidebar-nav" id="sidebar">
+    <div class="sidebar-header">
+      <img src="images/JJWESLogo.jpg" alt="JJWES Logo" class="sidebar-logo" />
+      <h1 class="sidebar-title">JAL-JEEVAN AND WOMEN EMPOWERMENT SOCIETY</h1>
+    </div>
+
+    <ul class="sidebar-menu">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="aboutus.html">
+          <i class="fas fa-info-circle"></i>
+          <span>About Us</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="certificates.html">
+          <i class="fas fa-certificate"></i>
+          <span>Certificates</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="collapse" data-target="#mediaMenu">
+          <i class="fas fa-photo-video"></i>
+          <span>Media</span>
+        </a>
+        <ul class="sidebar-submenu collapse" id="mediaMenu">
+          <li>
+            <a class="dropdown-item" href="gallerypage.html">
+              <i class="fas fa-images"></i>
+              <span>Photo Gallery</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="videos.html">
+              <i class="fas fa-video"></i>
+              <span>Video Gallery</span>
+            </a>
+          </li>
+          <li><div class="sidebar-divider"></div></li>
+          <li>
+            <a class="dropdown-item" href="news.html">
+              <i class="fas fa-newspaper"></i>
+              <span>News</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="documents.html">
+              <i class="fas fa-file-alt"></i>
+              <span>Documents</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="collapse" data-target="#programsMenu">
+          <i class="fas fa-tasks"></i>
+          <span>Programs</span>
+        </a>
+        <ul class="sidebar-submenu collapse" id="programsMenu">
+          <li>
+            <a class="dropdown-item" href="msme.html" style="background-color: rgba(255, 255, 255, 0.1);">
+              <i class="fas fa-shield-alt"></i>
+              <span>Cybersecurity Training</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="saynotodrugs.html">
+              <i class="fas fa-ban"></i>
+              <span>Say No To Drugs</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="rythurakshana.html">
+              <i class="fas fa-seedling"></i>
+              <span>Rythu Rakshana</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="tailoring.html">
+              <i class="fas fa-cut"></i>
+              <span>Tailoring Training</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="ReportonManeustrualHygiene.html">
+              <i class="fas fa-file-alt"></i>
+              <span>Menstrual Hygiene</span>
+            </a>
+          </li>
+          <li><div class="sidebar-divider"></div></li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="aboutfounder.html">
+          <i class="fas fa-info-circle"></i>
+          <span>About Founder</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link donate-link" href="donateuspage.html">
+          <i class="fas fa-hand-holding-heart"></i>
+          <span>Donate Now</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="main-content">
+
+    <section class="hero-section">
+      <div class="container">
+        <div class="row align-items-stretch">
+          <div class="col-lg-8 mb-4 mb-lg-0">
+            <div class="hero-card h-100">
+              <div class="hero-inner">
+                <img src="images/menstrual_hygiene_main.jpg" alt="World Menstrual Hygiene Day event" class="hero-main-image" />
+                <div class="hero-badge">
+                  <i class="fas fa-female"></i>
+                  World Menstrual Hygiene Day
+                </div>
+                <h1 class="hero-title">Celebrating health, dignity, and awareness for every woman</h1>
+                <p class="hero-text">
+                  Unicharam PVT LTD, Sofy, Lifree collaborate with Jal Jeevan and Women Empowerment Society
+                  for the World Menstrual Hygiene Day celebration at Dattatreya (Dasari) Colony, Kamareddy,
+                  Telangana, focusing on menstrual hygiene awareness, health education, and preventive care.
+                </p>
+
+                <div class="hero-stats">
+                  <div class="stat-box">
+                    <strong>100</strong>
+                    <span>Women participated</span>
+                  </div>
+                  <div class="stat-box">
+                    <strong>4–5 Days</strong>
+                    <span>Natural process</span>
+                  </div>
+                  <div class="stat-box">
+                    <strong>Health</strong>
+                    <span>Awareness & screening</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="hero-card h-100">
+              <div class="hero-side">
+                <div>
+                  <h3>Event Overview</h3>
+                  <p>
+                    The program was observed in Devunipalli, Kamareddy town, with active participation from local women.
+                    It highlighted the importance of menstrual hygiene, infection prevention, and safe healthcare practices.
+                  </p>
+                </div>
+                <div>
+                  <h3>Key Focus</h3>
+                  <ul>
+                    <li>Menstrual hygiene awareness</li>
+                    <li>Health precautions during menstruation</li>
+                    <li>Medical guidance from experts</li>
+                    <li>Community participation and screening</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-heading">About The Event</h2>
+          <p class="section-subtitle">
+            A special awareness program was organized to educate women about menstrual hygiene and the importance of maintaining health and dignity during menstruation.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="info-card h-100">
+              <div class="icon-circle">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3>Community Awareness</h3>
+              <p>
+                The event brought together local women, government hospital staff, and community leaders to create awareness about healthy menstrual practices and the risks of neglecting hygiene.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4">
+            <div class="info-card h-100">
+              <div class="icon-circle">
+                <i class="fas fa-heartbeat"></i>
+              </div>
+              <h3>Health Education</h3>
+              <p>
+                Speakers shared guidance on infection prevention, menstrual care, and the importance of safe health habits. Blood tests were also conducted as part of the awareness initiative.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-heading">Program Highlights</h2>
+          <p class="section-subtitle">Key moments and outcomes from the celebration.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="highlight-box">
+              <i class="fas fa-users"></i>
+              <h4>100 Women Participated</h4>
+              <p>Local women actively joined the event and participated in the awareness sessions.</p>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <div class="highlight-box">
+              <i class="fas fa-user-md"></i>
+              <h4>Expert Guidance</h4>
+              <p>Health professionals and school leaders shared practical advice on hygiene and safety.</p>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <div class="highlight-box">
+              <i class="fas fa-vial"></i>
+              <h4>Health Screening</h4>
+              <p>Blood tests and related health checks were conducted during the awareness program.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pt-0">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-heading">Awareness Poster</h2>
+          <p class="section-subtitle">Menstrual hygiene awareness material shared during the program.</p>
+        </div>
+
+        <div class="poster-wrap">
+          <img src="images/menstrual_hygiene_poster.jpg" alt="Menstrual hygiene awareness poster" class="poster-img" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-heading">Chief Guests & Participants</h2>
+          <p class="section-subtitle">The event was attended by community leaders and organization members.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <div class="info-card h-100">
+              <h3>Smt. Srivani</h3>
+              <p>Principal of Rajampet KGBV and Chief Guest at the event.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mb-4">
+            <div class="info-card h-100">
+              <h3>Sri Srinivas</h3>
+              <p>Coordinator of the Sampurna Suraksha program at Government Hospital, who shared awareness on precautionary measures.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mb-4">
+            <div class="info-card h-100">
+              <h3>Community Support</h3>
+              <p>Ward Councilor, community elders, district coordinators, and JJWES members supported the program.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-heading">Event Gallery</h2>
+          <p class="section-subtitle">Moments from the World Menstrual Hygiene Day awareness program.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 col-6 mb-4">
+            <div class="gallery-box">
+              <img src="images/menstrual_hygiene_1.jpg" alt="Menstrual hygiene event photo 1" class="gallery-img" />
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="gallery-box">
+              <img src="images/menstrual_hygiene_2.jpg" alt="Menstrual hygiene event photo 2" class="gallery-img" />
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="gallery-box">
+              <img src="images/menstrual_hygiene_3.jpg" alt="Menstrual hygiene event photo 3" class="gallery-img" />
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="gallery-box">
+              <img src="images/menstrual_hygiene_4.jpg" alt="Menstrual hygiene event photo 4" class="gallery-img" />
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="gallery-box">
+              <img src="images/menstrual_hygiene_5.jpg" alt="Menstrual hygiene event photo 5" class="gallery-img" />
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="gallery-box">
+              <img src="images/menstrual_hygiene_6.jpg" alt="Menstrual hygiene event photo 6" class="gallery-img" />
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="gallery-box">
+              <img src="images/menstrual_hygiene_7.jpg" alt="Menstrual hygiene event photo 7" class="gallery-img" />
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="gallery-box">
+              <img src="images/menstrual_hygiene_8.jpg" alt="Menstrual hygiene event photo 8" class="gallery-img" />
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="gallery-box">
+              <img src="images/menstrual_hygiene_9.jpg" alt="Menstrual hygiene event photo 9" class="gallery-img" />
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="gallery-box">
+              <img src="images/menstrual_hygiene_10.jpg" alt="Menstrual hygiene event photo 10" class="gallery-img" />
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="gallery-box">
+              <img src="images/menstrual_hygiene_11.jpg" alt="Menstrual hygiene event photo 11" class="gallery-img" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pt-0">
+      <div class="container">
+        <div class="cta-strip">
+          <h3>Together for dignity, health, and awareness</h3>
+          <p>World Menstrual Hygiene Day encourages open conversations, better hygiene practices, and stronger support for women’s health.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer-section" id="ContactUsSection">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-col">
+            <div class="footer-brand">
+              <img src="./images/JJWESLogo.jpg" alt="JJWES Logo" class="footer-logo" />
+              <span class="footer-brand-name">JJWES</span>
+            </div>
+            <div class="footer-contact">
+              <p><i class="fas fa-map-marker-alt"></i> 5-14/9 BC Colony Tekriyal, Kamareddy, Telangana, 503111</p>
+              <p><i class="fas fa-phone"></i> +91 8500797860, 9502718116</p>
+              <p><i class="fas fa-envelope"></i> jjwes2021@gmail.com</p>
+            </div>
+            <div class="social-links">
+              <a href="https://www.facebook.com/profile.php?id=61561466963145" target="_blank" class="social-link" style="background: #316FF6;"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/jjwes_ngo" target="_blank" class="social-link" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/jal-jeewan-and-women-empowerment-society/" target="_blank" class="social-link" style="background: #0077B5;"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://x.com/jjwes2021" target="_blank" class="social-link" style="background: #000;"><i class="fab fa-x-twitter"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-heading">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="aboutus.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+              <li><a href="gallerypage.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+              <li><a href="certificates.html"><i class="fas fa-chevron-right"></i> Certifications</a></li>
+              <li><a href="donateuspage.html"><i class="fas fa-chevron-right"></i> Donate Us</a></li>
+              <li><a href="aboutfounder.html"><i class="fas fa-chevron-right"></i> About Founder</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-heading">Our Programs</h4>
+            <ul class="footer-links">
+              <li><a href="rythurakshana.html"><i class="fas fa-chevron-right"></i> Rythu Rakshana</a></li>
+              <li><a href="tailoring.html"><i class="fas fa-chevron-right"></i> Tailoring Training</a></li>
+              <li><a href="cybersecurity.html"><i class="fas fa-chevron-right"></i> Cybersecurity Awareness</a></li>
+              <li><a href="ReportonManeustrualHygiene.html"><i class="fas fa-chevron-right"></i> Menstrual Hygiene</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <div class="footer-founder">
+              <img src="images/founder2.jpeg" alt="Founder" class="founder-img" />
+              <div class="founder-info">
+                <h5>Ravi Kumar Myadari</h5>
+                <p>(Mahendra)</p>
+                <span>Founder, Chief Functionary & President</span>
+                <div class="award-title">Awards</div>
+                <ul class="award-list">
+                  <li>🏆 Kalam Vishisht Seva Puraskar</li>
+                  <li>🏆 Dr. B.R. Ambedkar Excellence Award</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 JAL-JEEVAN AND WOMEN EMPOWERMENT SOCIETY (JJWES). All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+
+    document.querySelectorAll('.sidebar-nav a').forEach(link => {
+      link.addEventListener('click', function () {
+        if (window.innerWidth <= 991) {
+          const href = this.getAttribute('href');
+          if (href && href !== '#' && !this.classList.contains('dropdown-toggle')) {
+            toggleSidebar();
+          }
+        }
+      });
+    });
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true, offset: 100 });
+  </script>
+</body>
+</html>
